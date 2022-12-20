@@ -752,10 +752,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcc14ea38a90c7343a6af0a2531ebf0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  trail: {fileID: 1322836513438817914, guid: c946de20ce9bfc146b81b5ebc7a58714, type: 3}
   isJump: 0
   speed: 10
-  rotSpeed: 400
-  jumpPower: 1000
+  rotSpeed: 1000
+  jumpPower: 800
   myImage: {fileID: 942553913}
   rotDir: 0
 --- !u!1 &1416033975
