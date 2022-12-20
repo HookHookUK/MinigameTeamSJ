@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
             rot += rotSpeed * Time.deltaTime;
             yield return new WaitForSecondsRealtime(0.01f);
         }
-        myImage.transform.
+        //myImage.transform.
     }
 
     // Update is called once per frame
