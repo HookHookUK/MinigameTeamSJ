@@ -40,8 +40,8 @@ public class Player : MonoBehaviour
     {
         while(!isDead)
         {
-            Instantiate(trail, transform.position - trailPos, transform.rotation);
             yield return new WaitForSecondsRealtime(0.2f);
+            GameMGR.Instance.pool.CreatePrefab(trail, transform.position, Quaternion.identity);
         }
     }
 

@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class Trail : MonoBehaviour
 {
-    private void Start()
+    private void OnEnable()
     {
+        transform.localScale = Vector3.one * 0.3f;
         StartCoroutine(CO_BeSmall());
     }
 
     IEnumerator CO_BeSmall()
     {
         float time = 0f;
-        while(time < 1f)
+        while(time < 0.3f)
         {
             transform.localScale += new Vector3(-0.01f, -0.01f);
             time += 0.01f;
             yield return new WaitForSecondsRealtime(0.01f);
         }
-        Destroy(gameObject);
+        GameMGR.Instance.pool.DestroyPrefab(gameObject);
     }
 }
