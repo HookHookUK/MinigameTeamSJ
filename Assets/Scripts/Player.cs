@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
             rot += rotSpeed * Time.deltaTime;
             yield return new WaitForSecondsRealtime(0.01f);
         }
-        //myImage.transform.
+        myImage.transform.rotation = Quaternion.Euler(0,0, rotDir);
     }
 
     // Update is called once per frame
@@ -54,9 +54,8 @@ public class Player : MonoBehaviour
         {
             if (isJump) return;
 
-            rb.AddForce(Vector2.up * jumpPower) ;
+            rb.AddForce(Vector2.up * jumpPower);
             StartCoroutine(CO_PlayerRotate());
-            myImage.transform.localRotation = Quaternion.Euler(0,0,90f);
 
         }
     }
