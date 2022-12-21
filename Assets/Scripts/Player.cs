@@ -46,8 +46,7 @@ public class Player : MonoBehaviour
     }
     IEnumerator Die_Delay()
     {
-        audioSource.clip = GameMGR.Instance.audioMGR.PlaySound(SoundList.Die);
-        audioSource.Play();
+        GameMGR.Instance.audioMGR.PlaySound(SoundList.Die);
         for (int i=0; i<25;i++)
         {
             transform.localScale += new Vector3(-0.04f, -0.04f);
@@ -93,14 +92,14 @@ public class Player : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.Space))
         {
             if (isJump) return;
+            
             Jump(2);
         }
     }
 
     public void Jump(float value)
     {
-        audioSource.clip = GameMGR.Instance.audioMGR.PlaySound(SoundList.Jump);
-        audioSource.Play();
+        GameMGR.Instance.audioMGR.PlaySound(SoundList.Jump);
         isYPos = true;
         yPos = transform.position.y + value;
         rb.velocity= Vector2.up* jumpPower;

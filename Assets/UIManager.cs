@@ -41,7 +41,7 @@ public class UIManager : MonoBehaviour
         }
     }
 
-    public void OnClickMenuOff()
+    public void OnClickOption()
     {
        
     }
@@ -49,6 +49,7 @@ public class UIManager : MonoBehaviour
     public void OnClickHome()
     {
         GameMGR.Instance.RemovePlayer();
+        GameMGR.Instance.audioMGR.PlaySound(SoundList.Start);
         LobbyPanel.SetActive(true);
         Time.timeScale = 1f;
         showMenu = false;

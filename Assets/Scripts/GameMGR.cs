@@ -5,8 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class GameMGR : Singleton<GameMGR>
 {
-    public AudioSource myAudioSource;
+    //public AudioSource myAudioSource;
     public AudioMGR audioMGR;
+
     public UIManager uiMGR;
     public ObjectPool pool;
     public FollowCam followCam;
@@ -19,22 +20,21 @@ public class GameMGR : Singleton<GameMGR>
         followCam = FindObjectOfType<FollowCam>();
         uiMGR = FindObjectOfType<UIManager>();
         audioMGR = FindObjectOfType<AudioMGR>();
-        myAudioSource = GetComponent<AudioSource>();
+        //myAudioSource = GetComponent<AudioSource>();
     }
     private void Start()
     {
-        myAudioSource.clip = audioMGR.PlaySound(SoundList.BGM1);
-        myAudioSource.Play();
+        audioMGR.PlaySound(SoundList.Start);
     }
 
     public void GameStart()
     {
+        
         StartCoroutine(GameStart_Delay());
     }
     IEnumerator GameStart_Delay()
     {
-        myAudioSource.clip = audioMGR.PlaySound(SoundList.BGM2);
-        myAudioSource.Play();
+        audioMGR.PlaySound(SoundList.BGM1);
         followCam.gameObject.transform.position = new Vector3(5, 4, -1);
         player = pool.CreatePrefab(playerPrefab, new Vector2(-5f, 1f), Quaternion.identity);
         player.transform.position = new Vector2(-5f, 1f);
@@ -51,9 +51,9 @@ public class GameMGR : Singleton<GameMGR>
 
     public void RemovePlayer()
     {
-        myAudioSource.clip = audioMGR.PlaySound(SoundList.BGM1);
-        myAudioSource.Play();
-        if(player.activeSelf) pool.DestroyPrefab(player);
+        //audioMGR.PlaySound(SoundList.BGM1);
+        audioMGR.PlaySound(SoundList.Die);
+        if (player.activeSelf) pool.DestroyPrefab(player);
     }
 
     public void Resume()

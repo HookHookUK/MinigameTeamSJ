@@ -3,38 +3,44 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum SoundList
-{
-    Jump,
-    Die,
-    BGM1,
-    BGM2,
-}
+    {
+        Jump,
+        Die,
+        Start,
+        BGM1,
+        BGM2,
+    }   
 public class AudioMGR : MonoBehaviour
 {
 
-    // Start is called before the first frame update
-    [SerializeField] AudioClip JumpSound;
-    [SerializeField] AudioClip DieSound;
-    [SerializeField] AudioClip[] BGM;
+    [SerializeField] AudioSource[] BGM;
+    [SerializeField] AudioSource[] SFX;
 
-    public AudioClip PlaySound(SoundList sd)
+    public void PlaySound(SoundList sd)
     {
         if (sd == SoundList.Jump)
         {
-            return JumpSound;
+            SFX[0].Play();
         }
         else if (sd == SoundList.Die)
         {
-            return DieSound;
+            SFX[1].Play();
+        }
+        else if (sd == SoundList.Start)
+        {
+            BGM[0].Play();
+
+            BGM[1].Stop();
         }
         else if (sd == SoundList.BGM1)
         {
-            return BGM[0];
+            BGM[1].Play();
+
+            BGM[0].Stop();
         }
         else if (sd == SoundList.BGM2)
         {
-            return BGM[1];
+            BGM[2].Play();
         }
-        return null;
     }
 }
