@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 722704036239547265}
   - component: {fileID: 2281030898508518243}
   m_Layer: 0
-  m_Name: YellowJumpRing
+  m_Name: RedJumpRing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: -2413806693520163455, guid: a86470a33a6bf42c4b3595704624658b, type: 3}
-  m_Color: {r: 1, g: 0.95914936, b: 0, a: 1}
+  m_Color: {r: 1, g: 0.1462264, b: 0.18978322, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bdaf70f291f56a40a56d00269a739d0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  jumpPower: 3
+  jumpPower: 4
   destory: 1
 --- !u!58 &2281030898508518243
 CircleCollider2D:
