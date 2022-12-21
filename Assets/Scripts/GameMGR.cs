@@ -10,11 +10,22 @@ public class GameMGR : Singleton<GameMGR>
     private void Awake()
     {
         pool = GetComponent<ObjectPool>();
+        followCam= FindObjectOfType<FollowCam>();
     }
     
     public void GameStart()
     {
-        pool.CreatePrefab(playerPrefab,new Vector2(-5f,1f),Quaternion.identity);
+        StartCoroutine(GameStart_Delay());
+    }
+    IEnumerator GameStart_Delay()
+    {
+        followCam.gameObject.transform.position= new Vector3(5,4,-1);
+        GameObject obj= pool.CreatePrefab(playerPrefab, new Vector2(-5f, 1f), Quaternion.identity);
+        yield return new WaitForSeconds(1f);
+        followCam.SetPos(obj);
+        yield break;
+
+
     }
 
     public void GameEnd()

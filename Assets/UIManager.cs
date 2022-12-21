@@ -5,23 +5,20 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
+
     [SerializeField] GameObject Player;
-    [SerializeField] GameObject InGameButton;
+    [SerializeField] GameObject LobbyPanel;
+
 
     public void OnClickStart()
     {
         GameMGR.Instance.GameStart();
-        gameObject.SetActive(false);
+        LobbyPanel.SetActive(false);
     }
 
     public void OnClickExit()
     {
         GameMGR.Instance.GameEnd();
-    }
-
-    public void OnClickShowMenu()
-    {
-        InGameButton.transform.GetChild(1).gameObject.SetActive(true);
     }
 
     
