@@ -9,15 +9,14 @@ public class GameMGR : Singleton<GameMGR>
     {
         pool = GetComponent<ObjectPool>();
     }
-    // Start is called before the first frame update
-    void Start()
+    
+    public void GameStart()
     {
-       
+
     }
 
-    // Update is called once per frame
-    void Update()
+    public void GameEnd()
     {
-        
+
     }
 }
