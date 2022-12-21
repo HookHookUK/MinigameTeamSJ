@@ -30,6 +30,6 @@ public class GameMGR : Singleton<GameMGR>
 
     public void GameEnd()
     {
-
+        
     }
 }
