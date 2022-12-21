@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class GameMGR : Singleton<GameMGR>
 {
+    public AudioMGR audioMGR;
     public UIManager uiMGR;
     public ObjectPool pool;
     public FollowCam followCam;
@@ -14,6 +15,7 @@ public class GameMGR : Singleton<GameMGR>
         pool = GetComponent<ObjectPool>();
         followCam = FindObjectOfType<FollowCam>();
         uiMGR = FindObjectOfType<UIManager>();
+        audioMGR = FindObjectOfType<AudioMGR>();
     }
 
     public void GameStart()
