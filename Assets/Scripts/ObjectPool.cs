@@ -7,6 +7,17 @@ public class ObjectPool : MonoBehaviour
 
     Dictionary<string, List<GameObject>> table = new Dictionary<string, List<GameObject>>();
 
+    public void AddTalbe(GameObject prefab)
+
+    {
+        List<GameObject> list = null;
+        bool listCheck = table.TryGetValue(prefab.name, out list);
+        if (listCheck == false)
+        {
+            list = new List<GameObject>();
+            table.Add(prefab.name, list);
+        }
+    }
     public GameObject CreatePrefab(GameObject prefab, Vector3 position, Quaternion rotation)
     {
         List<GameObject> list = null;
@@ -45,8 +56,13 @@ public class ObjectPool : MonoBehaviour
         bool listCached = table.TryGetValue(prefabld, out list);
         if (listCached == false)
         {
-            Debug.LogError("Not Found" + Prefab.name);
-            return;
+            prefabld = Prefab.name;
+            listCached = table.TryGetValue(prefabld, out list);
+            if (listCached == false)
+            {
+                Debug.LogError("Not Found" + Prefab.name);
+                return;
+            }
         }
         Prefab.gameObject.SetActive(false);
         list.Add(Prefab);

@@ -4,15 +4,19 @@ using UnityEngine;
 
 public class Jump : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] float jumpPower;
+    [SerializeField] bool destory;
+    private void Start()
     {
-        
+        GameMGR.Instance.pool.AddTalbe(gameObject);
     }
-
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if(collision.gameObject.CompareTag("Player"))
+        {
+            collision.SendMessage("Jump", jumpPower, SendMessageOptions.DontRequireReceiver);
+            if(destory) GameMGR.Instance.pool.DestroyPrefab(gameObject);
+            //Destroy(gameObject);
+        }
     }
 }
