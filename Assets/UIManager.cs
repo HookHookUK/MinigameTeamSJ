@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] GameObject Player;
+    [SerializeField] GameObject InGameButton;
 
     public void OnClickStart()
     {
@@ -16,6 +17,11 @@ public class UIManager : MonoBehaviour
     public void OnClickExit()
     {
         GameMGR.Instance.GameEnd();
+    }
+
+    public void OnClickShowMenu()
+    {
+        InGameButton.transform.GetChild(1).gameObject.SetActive(true);
     }
 
     
