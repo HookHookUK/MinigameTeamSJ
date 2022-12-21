@@ -9,6 +9,7 @@ public class GameMGR : Singleton<GameMGR>
     public ObjectPool pool;
     public FollowCam followCam;
     [SerializeField] GameObject playerPrefab;
+    [SerializeField] ProgressBar progressBar;
     private void Awake()
     {
         pool = GetComponent<ObjectPool>();
@@ -26,6 +27,7 @@ public class GameMGR : Singleton<GameMGR>
         GameObject obj = pool.CreatePrefab(playerPrefab, new Vector2(-5f, 1f), Quaternion.identity);
         yield return new WaitForSeconds(1f);
         followCam.SetPos(obj);
+        progressBar.playerPos = obj.transform;
         yield break;
     }
 
