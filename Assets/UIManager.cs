@@ -7,12 +7,13 @@ public class UIManager : MonoBehaviour
 {
 
     [SerializeField] GameObject Player;
+    [SerializeField] GameObject LobbyPanel;
 
 
     public void OnClickStart()
     {
         GameMGR.Instance.GameStart();
-        gameObject.SetActive(false);
+        LobbyPanel.SetActive(false);
     }
 
     public void OnClickExit()
