@@ -27,6 +27,14 @@ public class AudioMGR : MonoBehaviour
         {
             return DieSound;
         }
+        else if (sd == SoundList.BGM1)
+        {
+            return BGM[0];
+        }
+        else if (sd == SoundList.BGM2)
+        {
+            return BGM[1];
+        }
         return null;
     }
 }

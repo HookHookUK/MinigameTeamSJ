@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     AudioSource audioSource;
     Rigidbody2D rb;
     bool isYPos;
-    bool isDead = false;
+    public bool isDead { get; private set; }
     float yPos;
     [SerializeField] bool isJump = false;
 
@@ -39,12 +39,11 @@ public class Player : MonoBehaviour
     {
         audioSource.clip = GameMGR.Instance.audioMGR.PlaySound(SoundList.Die);
         audioSource.Play();
-        for (int i=0; i<50;i++)
+        for (int i=0; i<25;i++)
         {
-            transform.localScale += new Vector3(-0.02f, -0.02f);
-            yield return new WaitForSecondsRealtime(0.01f);
+            transform.localScale += new Vector3(-0.04f, -0.04f);
+            yield return new WaitForSecondsRealtime(0.02f);
         }
-        yield return new WaitForSeconds(.1f);
         GameMGR.Instance.pool.DestroyPrefab(gameObject);
 
     }

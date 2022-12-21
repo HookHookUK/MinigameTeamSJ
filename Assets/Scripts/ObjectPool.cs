@@ -51,6 +51,7 @@ public class ObjectPool : MonoBehaviour
     }
     public void DestroyPrefab(GameObject Prefab)
     {
+        if (Prefab == null) return;
         List<GameObject> list = null;
         string prefabld = Prefab.name.Replace("(Clone)", "");
         bool listCached = table.TryGetValue(prefabld, out list);
