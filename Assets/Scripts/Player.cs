@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] GameObject trail;
+    Vector3 trailPos = new Vector3(-0.8f, -0.4f);
+
 
     Rigidbody2D rb;
     bool isDead = false;
@@ -21,6 +24,7 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         StartCoroutine(CO_MoveRight());
+        StartCoroutine(CO_TrailAdd());
     }
 
     IEnumerator CO_MoveRight()
@@ -30,18 +34,26 @@ public class Player : MonoBehaviour
             rb.transform.Translate(Vector3.right * speed * Time.deltaTime);
             yield return new WaitForSecondsRealtime(0.01f);
         }
-        
     }    
+
+    IEnumerator CO_TrailAdd()
+    {
+        while(!isDead)
+        {
+            yield return new WaitForSecondsRealtime(0.15f);
+            GameMGR.Instance.pool.CreatePrefab(trail, transform.position + trailPos, Quaternion.identity);
+        }
+    }
 
     IEnumerator CO_PlayerRotate()
     {
-        if (rotDir == 360) rotDir = 0;
-        rotDir += 90;
+        if (rotDir == -360) rotDir = 0;
+        rotDir -= 90;
         float rot = 0;
-        while(rot < 90f)
+        while(rot > -90f)
         {
-            myImage.transform.Rotate(0, 0, 1f * rotSpeed * Time.deltaTime);
-            rot += rotSpeed * Time.deltaTime;
+            myImage.transform.Rotate(0, 0, -1f * rotSpeed * Time.deltaTime);
+            rot -= rotSpeed * Time.deltaTime;
             yield return new WaitForSecondsRealtime(0.01f);
         }
         myImage.transform.rotation = Quaternion.Euler(0,0, rotDir);
@@ -56,6 +68,7 @@ public class Player : MonoBehaviour
 
             rb.AddForce(Vector2.up * jumpPower);
             StartCoroutine(CO_PlayerRotate());
+
 
         }
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameMGR : Singleton<GameMGR>
 {
-    ObjectPool pool;
+    public ObjectPool pool;
     private void Awake()
     {
         pool = GetComponent<ObjectPool>();
