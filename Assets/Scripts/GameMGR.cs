@@ -40,7 +40,7 @@ public class GameMGR : Singleton<GameMGR>
         Application.Quit();
     }
 
-    public void GoHome()
+    public void RemovePlayer()
     {
         myAudioSource.clip = audioMGR.PlaySound(SoundList.BGM1);
         myAudioSource.Play();
