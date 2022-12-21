@@ -68,8 +68,6 @@ public class Player : MonoBehaviour
 
             rb.AddForce(Vector2.up * jumpPower);
             StartCoroutine(CO_PlayerRotate());
-
-
         }
     }
 
