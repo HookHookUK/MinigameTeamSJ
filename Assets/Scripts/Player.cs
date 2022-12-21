@@ -5,7 +5,7 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] GameObject trail;
-    Vector3 trailPos = new Vector3(0.5f, 0);
+    Vector3 trailPos = new Vector3(-0.8f, -0.4f);
 
 
     Rigidbody2D rb;
@@ -40,8 +40,8 @@ public class Player : MonoBehaviour
     {
         while(!isDead)
         {
-            yield return new WaitForSecondsRealtime(0.2f);
-            GameMGR.Instance.pool.CreatePrefab(trail, transform.position, Quaternion.identity);
+            yield return new WaitForSecondsRealtime(0.15f);
+            GameMGR.Instance.pool.CreatePrefab(trail, transform.position + trailPos, Quaternion.identity);
         }
     }
 
