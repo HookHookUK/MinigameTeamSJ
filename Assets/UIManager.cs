@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
 public class UIManager : MonoBehaviour
 {
 
     [SerializeField] GameObject Player;
     [SerializeField] GameObject LobbyPanel;
-    [SerializeField] GameObject InGameScene;
+    [SerializeField] public GameObject InGameScene;
 
-    bool resume = false;
-    bool showMenu = false;
+    public bool showMenu = false;
 
     public void OnClickStart()
     {
@@ -30,38 +30,38 @@ public class UIManager : MonoBehaviour
         {
             InGameScene.transform.GetChild(1).gameObject.SetActive(true);
             showMenu = true;
+            Time.timeScale = 0f;
         }
 
         else
         { 
             InGameScene.transform.GetChild(1).gameObject.SetActive(false);
             showMenu = false;
+            Time.timeScale = 1f;
         }
+    }
+
+    public void OnClickMenuOff()
+    {
+       
     }
 
     public void OnClickHome()
     {
-        GameMGR.Instance.GoHome();
+        GameMGR.Instance.RemovePlayer();
         LobbyPanel.SetActive(true);
-        resume = false;
         Time.timeScale = 1f;
         showMenu = false;
         InGameScene.transform.GetChild(1).gameObject.SetActive(false);
     }
 
-    public void OnClickResume()
+    public void OnClickRestart()
     {
-        if(!resume)
-        {
-            Time.timeScale = 0f;
-            resume = true;
-
-        }
-        else
-        {
-            Time.timeScale = 1f;
-            resume = false;
-        }
+        showMenu = false;
+        InGameScene.transform.GetChild(1).gameObject.SetActive(false);
+        Time.timeScale = 1f;
+        GameMGR.Instance.RemovePlayer();
+        GameMGR.Instance.GameStart();
     }
 
 }

@@ -34,7 +34,7 @@ public class GameMGR : Singleton<GameMGR>
         Application.Quit();
     }
 
-    public void GoHome()
+    public void RemovePlayer()
     {
         pool.DestroyPrefab(FindObjectOfType<Player>().gameObject);
         
