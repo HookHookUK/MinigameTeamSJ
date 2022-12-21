@@ -5,9 +5,7 @@ using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
-
     [SerializeField] GameObject Player;
-
 
     public void OnClickStart()
     {
