@@ -12,6 +12,7 @@ public class GameMGR : Singleton<GameMGR>
     public FollowCam followCam;
     [SerializeField] GameObject playerPrefab;
     [SerializeField] ProgressBar progressBar;
+    GameObject player;
     private void Awake()
     {
         pool = GetComponent<ObjectPool>();
@@ -19,6 +20,11 @@ public class GameMGR : Singleton<GameMGR>
         uiMGR = FindObjectOfType<UIManager>();
         audioMGR = FindObjectOfType<AudioMGR>();
         myAudioSource = GetComponent<AudioSource>();
+    }
+    private void Start()
+    {
+        myAudioSource.clip = audioMGR.PlaySound(SoundList.BGM1);
+        myAudioSource.Play();
     }
 
     public void GameStart()
@@ -30,10 +36,11 @@ public class GameMGR : Singleton<GameMGR>
         myAudioSource.clip = audioMGR.PlaySound(SoundList.BGM2);
         myAudioSource.Play();
         followCam.gameObject.transform.position = new Vector3(5, 4, -1);
-        GameObject obj = pool.CreatePrefab(playerPrefab, new Vector2(-5f, 1f), Quaternion.identity);
+        player = pool.CreatePrefab(playerPrefab, new Vector2(-5f, 1f), Quaternion.identity);
+        player.transform.position = new Vector2(-5f, 1f);
         yield return new WaitForSeconds(1f);
-        followCam.SetPos(obj);
-        progressBar.playerPos = obj.transform;
+        followCam.SetPos(player);
+        progressBar.playerPos = player.transform;
         yield break;
     }
 
@@ -46,7 +53,7 @@ public class GameMGR : Singleton<GameMGR>
     {
         myAudioSource.clip = audioMGR.PlaySound(SoundList.BGM1);
         myAudioSource.Play();
-        pool.DestroyPrefab(FindObjectOfType<Player>().gameObject);
+        if(player.activeSelf) pool.DestroyPrefab(player);
     }
 
     public void Resume()

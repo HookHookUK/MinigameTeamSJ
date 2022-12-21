@@ -29,6 +29,15 @@ public class Player : MonoBehaviour
         StartCoroutine(CO_TrailAdd());
         GameMGR.Instance.pool.AddTalbe(gameObject);
     }
+    private void OnEnable()
+    {
+        yPos = 0;
+        isYPos = false;
+        isDead = false;
+        StartCoroutine(CO_TrailAdd());
+        myImage.transform.rotation = Quaternion.Euler(0, 0, 0);
+        transform.localScale = Vector3.one;
+    }
 
     void Die()
     {

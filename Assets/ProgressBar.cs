@@ -19,8 +19,8 @@ public class ProgressBar : MonoBehaviour
         
         if (playerPos == null) return;
         playerCurPos = playerPos.position;
-        percentText.text = (int)(playerPos.transform.position.x / arrive * 100) + "%";
-        percentIMG.fillAmount = (int)(playerPos.transform.position.x / arrive * 100);
+        percentText.text = $"{(int)(((int)(playerPos.transform.position.x) / arrive)*100)}%";
+        percentIMG.fillAmount = (playerPos.transform.position.x / arrive);
 
     }
     
