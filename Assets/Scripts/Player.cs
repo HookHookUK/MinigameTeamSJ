@@ -7,10 +7,10 @@ public class Player : MonoBehaviour
     [SerializeField] GameObject trail;
     Vector3 trailPos = new Vector3(-0.8f, -0.4f);
 
-
+    AudioSource audioSource;
     Rigidbody2D rb;
     bool isYPos;
-    bool isDead = false;
+    public bool isDead { get; private set; }
     float yPos;
     [SerializeField] bool isJump = false;
 
@@ -25,13 +25,27 @@ public class Player : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        audioSource = GetComponent<AudioSource>();
         StartCoroutine(CO_TrailAdd());
         GameMGR.Instance.pool.AddTalbe(gameObject);
     }
 
     void Die()
     {
+        isDead = true;
+        StartCoroutine(Die_Delay());
+    }
+    IEnumerator Die_Delay()
+    {
+        audioSource.clip = GameMGR.Instance.audioMGR.PlaySound(SoundList.Die);
+        audioSource.Play();
+        for (int i=0; i<25;i++)
+        {
+            transform.localScale += new Vector3(-0.04f, -0.04f);
+            yield return new WaitForSecondsRealtime(0.02f);
+        }
         GameMGR.Instance.pool.DestroyPrefab(gameObject);
+
     }
     IEnumerator CO_TrailAdd()
     {
@@ -60,7 +74,7 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-  
+        if (isDead) return;
         rb.transform.Translate(Vector3.right * speed * Time.deltaTime);
         if (transform.position.y > yPos && isYPos == true)
         {
@@ -76,6 +90,8 @@ public class Player : MonoBehaviour
 
     public void Jump(float value)
     {
+        audioSource.clip = GameMGR.Instance.audioMGR.PlaySound(SoundList.Jump);
+        audioSource.Play();
         isYPos = true;
         yPos = transform.position.y + value;
         rb.velocity= Vector2.up* jumpPower;

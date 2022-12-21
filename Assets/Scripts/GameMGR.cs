@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameMGR : Singleton<GameMGR>
 {
+    public AudioSource myAudioSource;
+    public AudioMGR audioMGR;
     public UIManager uiMGR;
     public ObjectPool pool;
     public FollowCam followCam;
@@ -15,6 +17,8 @@ public class GameMGR : Singleton<GameMGR>
         pool = GetComponent<ObjectPool>();
         followCam = FindObjectOfType<FollowCam>();
         uiMGR = FindObjectOfType<UIManager>();
+        audioMGR = FindObjectOfType<AudioMGR>();
+        myAudioSource = GetComponent<AudioSource>();
     }
 
     public void GameStart()
@@ -23,6 +27,8 @@ public class GameMGR : Singleton<GameMGR>
     }
     IEnumerator GameStart_Delay()
     {
+        myAudioSource.clip = audioMGR.PlaySound(SoundList.BGM2);
+        myAudioSource.Play();
         followCam.gameObject.transform.position = new Vector3(5, 4, -1);
         GameObject obj = pool.CreatePrefab(playerPrefab, new Vector2(-5f, 1f), Quaternion.identity);
         yield return new WaitForSeconds(1f);
@@ -38,8 +44,9 @@ public class GameMGR : Singleton<GameMGR>
 
     public void RemovePlayer()
     {
+        myAudioSource.clip = audioMGR.PlaySound(SoundList.BGM1);
+        myAudioSource.Play();
         pool.DestroyPrefab(FindObjectOfType<Player>().gameObject);
-        
     }
 
     public void Resume()
