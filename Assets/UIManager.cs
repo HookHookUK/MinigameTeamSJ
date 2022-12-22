@@ -70,4 +70,12 @@ public class UIManager : MonoBehaviour
         GameMGR.Instance.GameStart();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            OnClickRestart();
+        }
+    }
+
 }

@@ -184,7 +184,7 @@ GameObject:
   - component: {fileID: 681442271923000751}
   - component: {fileID: 681442271923000754}
   m_Layer: 0
-  m_Name: Player
+  m_Name: Player_TrailUpdateVer
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

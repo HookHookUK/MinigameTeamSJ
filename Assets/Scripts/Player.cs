@@ -19,14 +19,18 @@ public class Player : MonoBehaviour
     [SerializeField] float jumpPower;
 
     [SerializeField] GameObject myImage;
+    [SerializeField] GameObject myJumpTrail;
+
     [SerializeField] int rotDir;
+
+    
 
     Coroutine co_PlayerRotate;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         audioSource = GetComponent<AudioSource>();
-        StartCoroutine(CO_TrailAdd());
+        //StartCoroutine(CO_TrailAdd());
         GameMGR.Instance.pool.AddTalbe(gameObject);
     }
     private void OnEnable()
@@ -34,7 +38,7 @@ public class Player : MonoBehaviour
         yPos = 0;
         isYPos = false;
         isDead = false;
-        StartCoroutine(CO_TrailAdd());
+        //StartCoroutine(CO_TrailAdd());
         myImage.transform.rotation = Quaternion.Euler(0, 0, 0);
         transform.localScale = Vector3.one;
     }
@@ -49,7 +53,7 @@ public class Player : MonoBehaviour
         GameMGR.Instance.audioMGR.PlaySound(SoundList.Die);
         for (int i=0; i<25;i++)
         {
-            transform.localScale += new Vector3(-0.04f, -0.04f);
+            if(transform.localScale.x > 0) transform.localScale += new Vector3(-0.04f, -0.04f);
             yield return new WaitForSecondsRealtime(0.02f);
         }
         GameMGR.Instance.pool.DestroyPrefab(gameObject);
@@ -89,17 +93,17 @@ public class Player : MonoBehaviour
             isYPos = false;
             rb.velocity = Vector2.zero;
         }
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKey(KeyCode.Space) && !isJump)
         {
-            if (isJump) return;
             
             Jump(2);
-        }
+        } 
     }
 
     public void Jump(float value)
     {
         GameMGR.Instance.audioMGR.PlaySound(SoundList.Jump);
+        myJumpTrail.SetActive(true);
         isYPos = true;
         yPos = transform.position.y + value;
         rb.velocity= Vector2.up* jumpPower;
@@ -114,6 +118,7 @@ public class Player : MonoBehaviour
         if (collision.gameObject.CompareTag("Tile"))
         {
             isJump = false;
+            myJumpTrail.SetActive(false);
         }
     }
     private void OnCollisionExit2D(Collision2D collision)
