@@ -14,8 +14,10 @@ public class GameMGR : Singleton<GameMGR>
     [SerializeField] GameObject playerPrefab;
     [SerializeField] ProgressBar progressBar;
     GameObject player;
+    Jump[] jumps;
     private void Awake()
     {
+        jumps = FindObjectsOfType<Jump>();
         Application.targetFrameRate = 60;
         pool = GetComponent<ObjectPool>();
         followCam = FindObjectOfType<FollowCam>();
@@ -35,10 +37,12 @@ public class GameMGR : Singleton<GameMGR>
     }
     IEnumerator GameStart_Delay()
     {
+        foreach (Jump a in jumps) a.GameRespwan();
         audioMGR.PlaySound(SoundList.BGM1);
+        followCam.SetPos(null);
         followCam.gameObject.transform.position = new Vector3(5, 4, -1);
-        player = pool.CreatePrefab(playerPrefab, new Vector2(-5f, 1f), Quaternion.identity);
-        player.transform.position = new Vector2(-5f, 1f);
+        player = pool.CreatePrefab(playerPrefab, new Vector2(-5f, 4f), Quaternion.identity);
+        player.transform.position = new Vector2(-5f, 4f);
         yield return new WaitForSeconds(1f);
         followCam.SetPos(player);
         progressBar.playerPos = player.transform;
