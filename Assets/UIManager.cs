@@ -10,8 +10,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject Player;
     [SerializeField] GameObject LobbyPanel;
     [SerializeField] public GameObject InGameScene;
+    [SerializeField] GameObject soundOptionBox;
 
     public bool showMenu = false;
+    bool showOption = false;
 
     public void OnClickStart()
     {
@@ -43,7 +45,10 @@ public class UIManager : MonoBehaviour
 
     public void OnClickOption()
     {
-       
+        if(soundOptionBox.activeSelf==false)
+            soundOptionBox.SetActive(true);
+        else
+            soundOptionBox.SetActive(false);
     }
 
     public void OnClickHome()

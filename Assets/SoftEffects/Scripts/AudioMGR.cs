@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public enum SoundList
     {
@@ -15,6 +16,7 @@ public class AudioMGR : MonoBehaviour
 
     [SerializeField] AudioSource[] BGM;
     [SerializeField] AudioSource[] SFX;
+    [SerializeField] AudioMixer audioMixer;
 
     public void PlaySound(SoundList sd)
     {
@@ -24,7 +26,10 @@ public class AudioMGR : MonoBehaviour
         }
         else if (sd == SoundList.Die)
         {
-            SFX[1].Play();
+            if (Random.Range(0, 2) == 1)
+                SFX[1].Play();
+            else
+                SFX[2].Play();
         }
         else if (sd == SoundList.Start)
         {

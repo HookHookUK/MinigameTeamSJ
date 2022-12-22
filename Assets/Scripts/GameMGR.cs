@@ -16,6 +16,7 @@ public class GameMGR : Singleton<GameMGR>
     GameObject player;
     private void Awake()
     {
+        Application.targetFrameRate = 60;
         pool = GetComponent<ObjectPool>();
         followCam = FindObjectOfType<FollowCam>();
         uiMGR = FindObjectOfType<UIManager>();
@@ -51,8 +52,7 @@ public class GameMGR : Singleton<GameMGR>
 
     public void RemovePlayer()
     {
-        //audioMGR.PlaySound(SoundList.BGM1);
-        audioMGR.PlaySound(SoundList.Die);
+        audioMGR.PlaySound(SoundList.BGM1);
         if (player.activeSelf) pool.DestroyPrefab(player);
     }
 
