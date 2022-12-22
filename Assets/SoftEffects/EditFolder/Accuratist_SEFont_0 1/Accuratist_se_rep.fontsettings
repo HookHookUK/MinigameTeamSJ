@@ -9,7 +9,7 @@ Font:
   m_Name: Accuratist_se_rep
   serializedVersion: 5
   m_LineSpacing: 68.4
-  m_DefaultMaterial: {fileID: 2100000, guid: ee04711ade4b47f44ac11d3674972697, type: 2}
+  m_DefaultMaterial: {fileID: 2100000, guid: 06baa9c4aa95f4546aa35fa76f3795ff, type: 2}
   m_FontSize: 60
   m_Texture: {fileID: 2800000, guid: 9ae2690e52d82d443a56cf6dd1fbc700, type: 3}
   m_AsciiStartOffset: 0
