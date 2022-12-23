@@ -13,10 +13,12 @@ public class ProgressBar : MonoBehaviour
 
     [SerializeField] float arrive;
 
+    bool isEndStage;
 
     private void Update()
     {
-        
+
+        if (isEndStage) return;
         if (playerPos == null) return;
 
         playerCurPos = playerPos.position;
@@ -34,8 +36,21 @@ public class ProgressBar : MonoBehaviour
         {
             percentText.text = 100 + "%";
             percentIMG.fillAmount = 1;
+            EndStage();
         }
 
     }
+    public void EndStage()
+    {
+        isEndStage = true;
+        GameMGR.Instance.uiMGR.StageClearUI();
+
+    }
+    public void ReStart()
+    {
+        isEndStage = false;
+
+    }
+
     
 }
