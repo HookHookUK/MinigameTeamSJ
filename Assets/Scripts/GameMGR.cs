@@ -12,13 +12,14 @@ public class GameMGR : Singleton<GameMGR>
     public ObjectPool pool;
     public FollowCam followCam;
     [SerializeField] GameObject playerPrefab;
+    [SerializeField] GameObject[] stageOBJ;
     public ProgressBar progressBar;
     GameObject player;
     Jump[] jumps;
     private void Awake()
     {
         jumps = FindObjectsOfType<Jump>();
-        Application.targetFrameRate = 60;
+        Application.targetFrameRate = 120;
         pool = GetComponent<ObjectPool>();
         followCam = FindObjectOfType<FollowCam>();
         uiMGR = FindObjectOfType<UIManager>();
@@ -37,11 +38,21 @@ public class GameMGR : Singleton<GameMGR>
         {
             progressBar.arrive = 140;
             audioMGR.PlaySound(SoundList.BGM1);
+            for (int i = 0; i < stageOBJ.Length; i++)
+            {
+                if (i != stage - 1) stageOBJ[i].SetActive(false);
+                else stageOBJ[i].SetActive(true);
+            }
         }
         else if (stage == 2)
         {
             progressBar.arrive = 170;
             audioMGR.PlaySound(SoundList.BGM2);
+            for (int i = 0; i < stageOBJ.Length; i++)
+            {
+                if (i != stage - 1) stageOBJ[i].SetActive(false);
+                else stageOBJ[i].SetActive(true);
+            }
         }
         StartCoroutine(GameStart_Delay(stage));
     }
