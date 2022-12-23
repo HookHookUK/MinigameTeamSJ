@@ -9,7 +9,7 @@ Font:
   m_Name: calibrib_se_rep
   serializedVersion: 5
   m_LineSpacing: 87.890625
-  m_DefaultMaterial: {fileID: 2100000, guid: 1a3ec5e0e8bfed04d84da8f21b6cbb02, type: 2}
+  m_DefaultMaterial: {fileID: 2100000, guid: 1f0512691182dc04eabbabd3fff9b9ef, type: 2}
   m_FontSize: 72
   m_Texture: {fileID: 2800000, guid: bc7a768c592371d43a92cd3260c16349, type: 3}
   m_AsciiStartOffset: 0
