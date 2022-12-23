@@ -13,10 +13,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject soundOptionBox;
     [SerializeField] GameObject StageClearMenu;
     [SerializeField] GameObject StageClearMenuButton;
+    [SerializeField] GameObject StageNone;
 
     public bool showMenu = false;
     bool showOption = false;
-    int curStage = 1;
+     public int curStage { get; private set; } = 1;
 
     public void OnClickStart()
     {
@@ -98,7 +99,6 @@ public class UIManager : MonoBehaviour
     public void StageClearUI()
     {
         GameMGR.Instance.audioMGR.PlaySound(SoundList.Clear);
-        StageClearMenu.SetActive(true);
         StartCoroutine(StageClearUI_Delay());
 
     }
@@ -106,7 +106,6 @@ public class UIManager : MonoBehaviour
     {
         FadeIn(StageClearMenu);
         yield return new WaitForSeconds(0.5f);
-        StageClearMenuButton.SetActive(true);
         FadeIn(StageClearMenuButton);
     }
     public void FadeIn(GameObject obj)
@@ -115,6 +114,7 @@ public class UIManager : MonoBehaviour
     }
     IEnumerator FadeIn_Delay(GameObject obj)
     {
+        obj.SetActive(true);
         CanvasGroup Ap= obj.GetComponent<CanvasGroup>();
         Ap.alpha = 0;
         for (int i = 0; i<25; i++)
@@ -124,11 +124,48 @@ public class UIManager : MonoBehaviour
         }
         yield break;
     }
+    public void FadeOut(GameObject obj)
+    {
+        StartCoroutine(FadeOut_Delay(obj));
+    }
+    IEnumerator FadeOut_Delay(GameObject obj)
+    {
+        CanvasGroup Ap = obj.GetComponent<CanvasGroup>();
+        Ap.alpha = 1;
+        for (int i = 0; i < 25; i++)
+        {
+            yield return new WaitForSeconds(0.01f);
+            if (Ap.alpha > 0) Ap.alpha -= 0.04f;
+            else if (Ap.alpha < 0) Ap.alpha = 0;
+        }
+        obj.SetActive(false);
+        yield break;
+    }
     public void OnClickNextStage()
     {
-        if (curStage >= 2) return;
+        if (curStage >= 2)
+        {
+            StageNones();
+            return;
+        }
         curStage++;
         OnClickRestart();
 
+    }
+    bool isNone;
+    void StageNones()
+    {
+        if (isNone) return;
+        StartCoroutine(StageNone_Delay());
+    }
+    IEnumerator StageNone_Delay()
+    {
+        isNone = true;
+        FadeIn(StageNone);
+        yield return new WaitForSeconds(1f);
+        FadeOut(StageNone);
+        yield return new WaitForSeconds(1f);
+
+        isNone = false;
     }
 }
