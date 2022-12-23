@@ -11,7 +11,7 @@ public class SoundSlider : MonoBehaviour
 
     public void AudioControl(float sliderVal)
     {
-        audioMixer.SetFloat("Master", Mathf.Log10(sliderVal) * 20);
+        audioMixer.SetFloat("Master", sliderVal);
     }
     
     public void ToggleAudioVolume()

@@ -11,7 +11,7 @@ public class ProgressBar : MonoBehaviour
     [SerializeField] public Transform playerPos;
     [SerializeField] public Vector2 playerCurPos;
 
-    [SerializeField] float arrive;
+    public float arrive;
 
     bool isEndStage;
 
