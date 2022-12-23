@@ -19,7 +19,9 @@ public class Player : MonoBehaviour
     [SerializeField] float jumpPower;
 
     [SerializeField] GameObject myImage;
+    [SerializeField] GameObject myTrail;
     [SerializeField] GameObject myJumpTrail;
+    [SerializeField] GameObject myDieEffect;
 
     [SerializeField] int rotDir;
 
@@ -35,6 +37,8 @@ public class Player : MonoBehaviour
     }
     private void OnEnable()
     {
+        myImage.SetActive(true);
+        myTrail.SetActive(true);
         yPos = 0;
         isYPos = false;
         isDead = false;
@@ -46,17 +50,24 @@ public class Player : MonoBehaviour
 
     void Die()
     {
-        isDead = true;
-        StartCoroutine(Die_Delay());
+        if(!isDead)
+        {
+            isDead = true;
+            StartCoroutine(Die_Delay());
+        }
+            
     }
     IEnumerator Die_Delay()
     {
+        myImage.SetActive(false);
+        myTrail.SetActive(false);
+        Instantiate(myDieEffect, transform.position, Quaternion.Euler(0, 90, 90));
         GameMGR.Instance.audioMGR.PlaySound(SoundList.Die);
-        for (int i=0; i<30;i++)
+/*        for (int i=0; i<30;i++)
         {
             if(transform.localScale.x > 0) transform.localScale += new Vector3(-0.03f, -0.03f);
             yield return new WaitForSecondsRealtime(0.02f);
-        }
+        }*/
         yield return new WaitForSeconds(0.5f);
         GameMGR.Instance.GameStart(GameMGR.Instance.uiMGR.curStage);
         GameMGR.Instance.pool.DestroyPrefab(gameObject);
