@@ -635,7 +635,7 @@ MonoBehaviour:
   percentIMG: {fileID: 3407605387324817898}
   playerPos: {fileID: 0}
   playerCurPos: {x: 0, y: 0}
-  arrive: 100
+  arrive: 140
 --- !u!1 &3407605386850117193
 GameObject:
   m_ObjectHideFlags: 0
@@ -1887,7 +1887,7 @@ GameObject:
   - component: {fileID: 3407605387348791746}
   - component: {fileID: 3407605387348791745}
   m_Layer: 5
-  m_Name: Text (Legacy)
+  m_Name: Name
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7157,7 +7157,7 @@ GameObject:
   - component: {fileID: 3407605387653667811}
   - component: {fileID: 3407605387653667810}
   m_Layer: 5
-  m_Name: UI
+  m_Name: UIbefore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
