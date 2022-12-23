@@ -71,7 +71,6 @@ public class UIManager : MonoBehaviour
         }
         Debug.Log("ตส4");
         GameMGR.Instance.RemovePlayer();
-        GameMGR.Instance.progressBar.ReStart();
         GameMGR.Instance.audioMGR.PlaySound(SoundList.Start);
         LobbyPanel.SetActive(true);
         Time.timeScale = 1f;
@@ -89,7 +88,6 @@ public class UIManager : MonoBehaviour
                 StageClearMenu.SetActive(false);
             }
         }
-        GameMGR.Instance.progressBar.ReStart();
         showMenu = false;
         InGameScene.transform.GetChild(1).gameObject.SetActive(false);
         Time.timeScale = 1f;

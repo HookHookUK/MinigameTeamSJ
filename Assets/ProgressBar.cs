@@ -49,6 +49,8 @@ public class ProgressBar : MonoBehaviour
     public void ReStart()
     {
         isEndStage = false;
+        percentText.text = 0 + "%";
+        percentIMG.fillAmount = 0;
 
     }
 

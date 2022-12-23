@@ -69,8 +69,8 @@ public class Player : MonoBehaviour
             yield return new WaitForSecondsRealtime(0.02f);
         }*/
         yield return new WaitForSeconds(0.5f);
-        GameMGR.Instance.GameStart(GameMGR.Instance.uiMGR.curStage);
         GameMGR.Instance.pool.DestroyPrefab(gameObject);
+        GameMGR.Instance.GameStart(GameMGR.Instance.uiMGR.curStage);
 
     }
     IEnumerator CO_TrailAdd()

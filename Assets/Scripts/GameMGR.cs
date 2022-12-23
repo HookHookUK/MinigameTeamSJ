@@ -32,6 +32,7 @@ public class GameMGR : Singleton<GameMGR>
 
     public void GameStart(int stage)
     {
+        progressBar.ReStart();
         if (stage == 1)
         {
             progressBar.arrive = 140;
