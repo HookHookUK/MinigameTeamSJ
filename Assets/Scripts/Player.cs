@@ -20,6 +20,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] GameObject myImage;
     [SerializeField] GameObject myJumpTrail;
+    [SerializeField] GameObject myDieEffect;
+
 
     [SerializeField] int rotDir;
 
@@ -46,16 +48,14 @@ public class Player : MonoBehaviour
     void Die()
     {
         isDead = true;
+        GameMGR.Instance.audioMGR.PlaySound(SoundList.Die);
+        Instantiate(myDieEffect, transform.position, Quaternion.identity);
         StartCoroutine(Die_Delay());
     }
     IEnumerator Die_Delay()
     {
-        GameMGR.Instance.audioMGR.PlaySound(SoundList.Die);
-        for (int i=0; i<25;i++)
-        {
-            if(transform.localScale.x > 0) transform.localScale += new Vector3(-0.04f, -0.04f);
-            yield return new WaitForSecondsRealtime(0.02f);
-        }
+        
+        yield return new WaitForSecondsRealtime(0.1f);
         GameMGR.Instance.pool.DestroyPrefab(gameObject);
 
     }
