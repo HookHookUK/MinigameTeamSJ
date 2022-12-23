@@ -8,6 +8,7 @@ public enum SoundList
         Jump,
         Die,
         Start,
+        Clear,
         BGM1,
         BGM2,
     }   
@@ -23,6 +24,10 @@ public class AudioMGR : MonoBehaviour
         if (sd == SoundList.Jump)
         {
             SFX[0].Play();
+        }
+        else if (sd == SoundList.Clear)
+        {
+            SFX[3].Play();
         }
         else if (sd == SoundList.Die)
         {

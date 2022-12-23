@@ -12,7 +12,7 @@ public class GameMGR : Singleton<GameMGR>
     public ObjectPool pool;
     public FollowCam followCam;
     [SerializeField] GameObject playerPrefab;
-    [SerializeField] ProgressBar progressBar;
+    public ProgressBar progressBar;
     GameObject player;
     Jump[] jumps;
     private void Awake()
@@ -30,19 +30,28 @@ public class GameMGR : Singleton<GameMGR>
         audioMGR.PlaySound(SoundList.Start);
     }
 
-    public void GameStart()
+    public void GameStart(int stage)
     {
         
-        StartCoroutine(GameStart_Delay());
+        StartCoroutine(GameStart_Delay(stage));
     }
-    IEnumerator GameStart_Delay()
+    IEnumerator GameStart_Delay(int stage)
     {
         foreach (Jump a in jumps) a.GameRespwan();
         audioMGR.PlaySound(SoundList.BGM1);
         followCam.SetPos(null);
-        followCam.gameObject.transform.position = new Vector3(5, 4, -1);
-        player = pool.CreatePrefab(playerPrefab, new Vector2(-5f, 4f), Quaternion.identity);
-        player.transform.position = new Vector2(-5f, 4f);
+        if (stage == 1)
+        {
+            followCam.gameObject.transform.position = new Vector3(5, 4, -1);
+            player = pool.CreatePrefab(playerPrefab, new Vector2(-5f, 4f), Quaternion.identity);
+            player.transform.position = new Vector2(-5f, 4f);
+        }
+        else if(stage==2)
+        {
+            followCam.gameObject.transform.position = new Vector3(5, -6.5f, -1);
+            player = pool.CreatePrefab(playerPrefab, new Vector2(-5f, -10f), Quaternion.identity);
+            player.transform.position = new Vector2(-5f, -10f);
+        }
         yield return new WaitForSeconds(1f);
         followCam.SetPos(player);
         progressBar.playerPos = player.transform;
@@ -57,6 +66,7 @@ public class GameMGR : Singleton<GameMGR>
     public void RemovePlayer()
     {
         audioMGR.PlaySound(SoundList.BGM1);
+        player.transform.position = Vector3.zero;
         if (player.activeSelf) pool.DestroyPrefab(player);
     }
 
