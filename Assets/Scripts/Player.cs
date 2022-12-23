@@ -9,9 +9,9 @@ public class Player : MonoBehaviour
 
     AudioSource audioSource;
     Rigidbody2D rb;
-    bool isYPos;
+    [SerializeField] bool isYPos;
     public bool isDead { get; private set; }
-    float yPos;
+    [SerializeField] float yPos;
     [SerializeField] bool isJump = false;
 
     [SerializeField] float speed;
