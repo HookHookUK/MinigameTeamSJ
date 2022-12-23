@@ -32,7 +32,8 @@ public class GameMGR : Singleton<GameMGR>
 
     public void GameStart(int stage)
     {
-        
+        if (stage == 1) progressBar.arrive = 140;
+        else if (stage == 2) progressBar.arrive = 170;
         StartCoroutine(GameStart_Delay(stage));
     }
     IEnumerator GameStart_Delay(int stage)
